@@ -49,9 +49,9 @@ with qball:
 Options
 =======
 Defaults shown below
-- user_name=False - what user_name to register with when waiting. will auto-generate from the key_prefix and a random number if not used
-- timeout=10 - how often to check back with qball
-- key_prefix='qball-python_' - prefix for auto-generated user ids
-- log_level=0 = how much to log. 1 will show everything, 0 shows only a little
-- allow_no_connect=False - If your qball instance may go down and you don't want to allow execution to continue without error handling, set this to true
+- `user_name=False` - what user_name to register with when waiting. will auto-generate from the key_prefix and a random number if not used
+- `timeout=10` - how often to check back with qball
+- `key_prefix='qball-python_'` - prefix for auto-generated user ids
+- `log_level=0` = how much to log. 1 will show everything, 0 shows only a little
+- `allow_no_connect=False` - If your qball instance may go down and you don't want to allow execution to continue without error handling, set this to true
 
