@@ -13,7 +13,7 @@ $ pip install git+ssh://git@github.com/ferrants/qball-python.git@master --upgrad
 
 Use in script
 =============
-```
+```python
 from qball.qball import QBall
 from qball.qball import QBallException
 
