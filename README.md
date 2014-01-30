@@ -1,7 +1,7 @@
 QBall python integration
 ========================
 
-Run a qball instance somewhere. Use it in python with this repo.
+Run a [qball|https://github.com/ferrants/qball]  instance somewhere. Use it in python with this repo.
 
 Install
 =======
