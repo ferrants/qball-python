@@ -13,7 +13,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
 
 class QBall( object ):
-    def __init__(self, url, port, ball_name, user_name=False, timeout=10, key_prefix='qball-python_', log_level=0):
+    def __init__(self, url, port, ball_name, user_name=False, timeout=10, key_prefix='qball-python_', log_level=0, allow_no_connect=False):
         self.url = url
         self.port = port
         self.ball_name = ball_name
@@ -22,6 +22,7 @@ class QBall( object ):
             user_name = "{0}{1}".format(key_prefix, id_generator())
         self.user_name = user_name
         self.log_level = log_level
+        self.allow_no_connect = allow_no_connect
 
     def _msg(self, msg, level=1):
         if level <= self.log_level:
@@ -61,7 +62,8 @@ class QBall( object ):
             return False
         else:
             self._msg("status code error")
-            raise QBallException("unable to request hold")
+            if self.allow_no_connect == False:
+                raise QBallException("unable to request spot in line")
 
     def wait_for_hold(self):
         code = self._url("/{0}/wait_for/{1}".format(self.user_name, self.ball_name))
@@ -76,7 +78,8 @@ class QBall( object ):
             return True
         else:
             self._msg("status code error")
-            raise QBallException("unable to request spot in line")
+            if self.allow_no_connect == False:
+                raise QBallException("unable to request spot in line")
 
     def put(self):
         code = self._url("/{0}/put/{1}".format(self.user_name, self.ball_name))
@@ -88,7 +91,8 @@ class QBall( object ):
             return False
         else:
             self._msg("status code error")
-            raise QBallException("unable to request spot in line")
+            if self.allow_no_connect == False:
+                raise QBallException("unable to request spot in line")
 
     def __enter__(self):
         self._msg("before entering")
