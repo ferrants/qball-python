@@ -6,6 +6,9 @@ import string
 import json
 import httplib2
 
+class QBallException(Exception):
+    pass
+
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
 
@@ -58,7 +61,7 @@ class QBall( object ):
             return False
         else:
             self._msg("status code error")
-            raise Exception("unable to request hold")
+            raise QBallException("unable to request hold")
 
     def wait_for_hold(self):
         code = self._url("/{0}/wait_for/{1}".format(self.user_name, self.ball_name))
@@ -73,7 +76,7 @@ class QBall( object ):
             return True
         else:
             self._msg("status code error")
-            raise Exception("unable to request spot in line")
+            raise QBallException("unable to request spot in line")
 
     def put(self):
         code = self._url("/{0}/put/{1}".format(self.user_name, self.ball_name))
@@ -85,7 +88,7 @@ class QBall( object ):
             return False
         else:
             self._msg("status code error")
-            raise Exception("unable to request spot in line")
+            raise QBallException("unable to request spot in line")
 
     def __enter__(self):
         self._msg("before entering")
