@@ -6,6 +6,8 @@ Run a qball (https://github.com/ferrants/qball)  instance somewhere. Use it in p
 Install
 =======
 ```
+$ pip install qball
+# or
 $ pip install git+ssh://git@github.com/ferrants/qball-python.git@master --upgrade
 ```
 
