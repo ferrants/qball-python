@@ -12,8 +12,8 @@ $ pip install git+ssh://git@github.com/ferrants/qball-python.git@master --upgrad
 Use in script
 =============
 ```
-from qball import QBall
-from qball import QBallException
+from qball.qball import QBall
+from qball.qball import QBallException
 
 # no exception handling - server must be alive or an exception will be thrown
 qball = QBall('http://localhost', 8080, 'ball', timeout=2, log_level=1)
