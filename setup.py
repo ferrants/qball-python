@@ -16,4 +16,6 @@ setup(
     install_requires=['httplib2 >= 0.8'],
     setup_requires=['httplib2'],
     version='1.1.0',
+    url="https://github.com/ferrants/qball-python",
+    keywords = ['locking', 'resource locking', 'webservice'],
 )
