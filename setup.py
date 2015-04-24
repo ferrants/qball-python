@@ -15,5 +15,5 @@ setup(
     packages=['qball'],
     install_requires=['httplib2 >= 0.8'],
     setup_requires=['httplib2'],
-    version='0.1.0',
+    version='1.1.0',
 )
