@@ -68,10 +68,14 @@ class QBall( object ):
     def wait_for_hold(self):
         code = self._url("/{0}/wait_for/{1}".format(self.user_name, self.ball_name))
         if code == 200:
-            while not self.hold():
-                self._msg("waiting...")
-                time.sleep(self.timeout)
-            return True
+            try:
+                while not self.hold():
+                    self._msg("waiting...")
+                    time.sleep(self.timeout)
+                    return True
+            finally:
+                self.stop_waiting_for_hold()
+
         elif code == 405:
             self._msg('not held, grabbing')
             self.hold()
@@ -80,6 +84,19 @@ class QBall( object ):
             self._msg("status code error")
             if self.allow_no_connect == False:
                 raise QBallException("unable to request spot in line")
+
+    def stop_waiting_for_hold(self):
+        code = self._url("/{0}/stop_wait_for/{1}".format(self.user_name, self.ball_name))
+        if code == 200:
+            self._msg("stopped waiting for hold")
+            return True
+        elif code == 405:
+            self._msg('not waiting for hold')
+            return False
+        else:
+            self._msg("status code error")
+            if self.allow_no_connect == False:
+                raise QBallException("unable to stop waiting for hold")
 
     def put(self):
         code = self._url("/{0}/put/{1}".format(self.user_name, self.ball_name))
@@ -101,6 +118,7 @@ class QBall( object ):
 
         self._msg("after entering")
         return self
+
     def __exit__(self, type, value, tb):
         if type is not None:
             self._msg("exception caught")
